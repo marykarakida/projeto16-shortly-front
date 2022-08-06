@@ -8,17 +8,17 @@ import PageView from './layout/PageView';
 import HomePage from './pages/HomePage';
 import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
-import UserPage from './pages/UserPage';
+import RankingPage from './pages/RankingPage';
 
 function App() {
     return (
         <BrowserRouter>
             <PageView>
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/" element={<RankingPage />} />
+                    <Route path="/home" element={<HomePage />} />
                     <Route path="/signin" element={<SigninPage />} />
                     <Route path="/signup" element={<SignupPage />} />
-                    <Route path="/user" element={<UserPage />} />
                 </Routes>
             </PageView>
         </BrowserRouter>
