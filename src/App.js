@@ -8,6 +8,7 @@ import { UserContextProvider } from './contexts/userContext';
 
 import PageView from './layout/PageView';
 import Header from './layout/Header';
+import Logo from './components/Logo';
 import HomePage from './pages/HomePage';
 import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
@@ -19,6 +20,7 @@ function App() {
             <BrowserRouter>
                 <PageView>
                     <Header />
+                    <Logo />
                     <Routes>
                         <Route path="/" element={<RankingPage />} />
                         <Route path="/home" element={<HomePage />} />
