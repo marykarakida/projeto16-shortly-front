@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PageContainer from '../components/PageContainer';
+import PageContainer from '../layout/PageContainer';
 
 export default function UserPage() {
     return (

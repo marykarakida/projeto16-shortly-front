@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './assets/styles/reset.css';
 import './assets/styles/style.css';
 
-import PageView from './components/PageView';
+import PageView from './layout/PageView';
 import HomePage from './pages/HomePage';
 import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
