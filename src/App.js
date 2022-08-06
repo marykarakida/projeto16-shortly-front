@@ -6,6 +6,9 @@ import './assets/styles/style.css';
 
 import PageView from './components/PageView';
 import HomePage from './pages/HomePage';
+import SigninPage from './pages/SigninPage';
+import SignupPage from './pages/SignupPage';
+import UserPage from './pages/UserPage';
 
 function App() {
     return (
@@ -13,6 +16,9 @@ function App() {
             <PageView>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/signin" element={<SigninPage />} />
+                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/user" element={<UserPage />} />
                 </Routes>
             </PageView>
         </BrowserRouter>
