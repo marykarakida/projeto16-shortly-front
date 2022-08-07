@@ -18,8 +18,9 @@ export default function SigninPage() {
 
     useEffect(() => {
         if (data) {
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('name', data.name);
+            const { token, name } = data;
+            localStorage.setItem('token', { token });
+            localStorage.setItem('name', JSON.stringify({ name }));
             navigate('/home', { replace: true });
         }
     }, [data]);
