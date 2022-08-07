@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useAxios from '../hooks/useAxios';
+import useAuthentication from '../hooks/useAuthentication';
 
 import PageContainer from '../layout/PageContainer';
 import Form from '../components/Form/Form';
@@ -19,8 +20,8 @@ export default function SigninPage() {
     useEffect(() => {
         if (data) {
             const { token, name } = data;
-            localStorage.setItem('token', { token });
-            localStorage.setItem('name', JSON.stringify({ name }));
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify({ name }));
             navigate('/home', { replace: true });
         }
     }, [data]);
