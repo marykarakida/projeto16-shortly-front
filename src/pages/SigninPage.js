@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import UserContext from '../contexts/userContext';
 import useAxios from '../hooks/useAxios';
-import useAuthentication from '../hooks/useAuthentication';
 
 import PageContainer from '../layout/PageContainer';
 import Form from '../components/Form/Form';
@@ -12,16 +12,24 @@ import Button from '../components/Form/Button';
 export default function SigninPage() {
     const navigate = useNavigate();
 
+    const { authenticated, checkSession } = useContext(UserContext);
+    const [{ loading, data }, executePost] = useAxios({ method: 'POST', route: '/signin' }, true);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [{ loading, data }, executePost] = useAxios({ method: 'POST', route: '/signin' }, true);
+    useEffect(() => {
+        if (authenticated) {
+            navigate('/home', { replace: true });
+        }
+    }, [authenticated]);
 
     useEffect(() => {
         if (data) {
             const { token, name } = data;
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify({ name }));
+            checkSession();
             navigate('/home', { replace: true });
         }
     }, [data]);

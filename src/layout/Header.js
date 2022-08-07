@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useMemo, useContext } from 'react';
 import styled from 'styled-components';
 
 import UserContext from '../contexts/userContext';
@@ -6,12 +6,14 @@ import UserContext from '../contexts/userContext';
 import Navbar from './Navbar';
 
 export default function Header() {
-    const { isLogged } = useContext(UserContext);
+    const { authenticated, getSession } = useContext(UserContext);
+
+    const { user } = useMemo(getSession, [authenticated]);
 
     return (
         <Container>
-            {isLogged && <Title>Seja bem-vindo(a), Pessoa!</Title>}
-            <Navbar />
+            {authenticated && <Title>Seja bem-vindo(a), {user.name}!</Title>}
+            <Navbar authenticated={authenticated} />
         </Container>
     );
 }

@@ -16,8 +16,8 @@ import RankingPage from './pages/RankingPage';
 
 function App() {
     return (
-        <UserContextProvider>
-            <BrowserRouter>
+        <BrowserRouter>
+            <UserContextProvider>
                 <PageView>
                     <Header />
                     <Logo />
@@ -28,8 +28,8 @@ function App() {
                         <Route path="/signup" element={<SignupPage />} />
                     </Routes>
                 </PageView>
-            </BrowserRouter>
-        </UserContextProvider>
+            </UserContextProvider>
+        </BrowserRouter>
     );
 }
 

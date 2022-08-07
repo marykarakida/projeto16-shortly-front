@@ -1,20 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import UserContext from '../contexts/userContext';
 
 export default function Navbar() {
-    const navigate = useNavigate();
     const { pathname } = useLocation();
-    const { isLogged } = useContext(UserContext);
+    const navigate = useNavigate();
 
-    if (isLogged) {
+    const { authenticated, finishSession } = useContext(UserContext);
+
+    const logout = useCallback(() => {
+        if (window.confirm('Do you really want to logout?')) {
+            finishSession();
+            navigate('/');
+        }
+    }, []);
+
+    if (authenticated) {
         return (
             <NavMenu>
                 <NavItem onClick={() => navigate('/home')}>Home</NavItem>
                 <NavItem onClick={() => navigate('/')}>Ranking</NavItem>
-                <NavItem onClick={() => navigate('/')} underline>
+                <NavItem onClick={logout} underline>
                     Sair
                 </NavItem>
             </NavMenu>
