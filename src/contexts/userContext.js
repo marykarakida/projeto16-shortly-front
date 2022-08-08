@@ -17,6 +17,8 @@ export function UserContextProvider({ children }) {
 
         if (token && user) {
             setAuthenticated(true);
+        } else {
+            setAuthenticated(false);
         }
     };
 
