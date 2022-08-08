@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect, useMemo } from 'react';
 const UserContext = createContext();
 
 export function UserContextProvider({ children }) {
-    const [authenticated, setAuthenticated] = useState(false);
+    const [authenticated, setAuthenticated] = useState(null);
 
     const getSession = () => {
         const token = localStorage.getItem('token');
@@ -12,20 +12,20 @@ export function UserContextProvider({ children }) {
         return { token, user };
     };
 
+    const finishSession = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setAuthenticated(false);
+    };
+
     const checkSession = () => {
         const { token, user } = getSession();
 
         if (token && user) {
             setAuthenticated(true);
         } else {
-            setAuthenticated(false);
+            finishSession();
         }
-    };
-
-    const finishSession = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setAuthenticated(false);
     };
 
     useEffect(() => {

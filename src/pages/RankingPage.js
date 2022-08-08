@@ -33,7 +33,7 @@ export default function RankingPage() {
                         </RankingItem>
                     ))}
             </RankingList>
-            {!authenticated && (
+            {authenticated === false && (
                 <Title>
                     <h2>Crie sua conta para usar nosso serviço!</h2>
                 </Title>
