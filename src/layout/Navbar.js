@@ -31,10 +31,10 @@ export default function Navbar() {
 
     return (
         <NavMenu>
-            <NavItem onClick={() => navigate('/signin')} highlight={pathname === '/signup'}>
+            <NavItem onClick={() => navigate('/signin')} highlight={pathname !== '/signup'}>
                 Entrar
             </NavItem>
-            <NavItem onClick={() => navigate('/signup')} highlight={pathname !== '/signup'}>
+            <NavItem onClick={() => navigate('/signup')} highlight={pathname === '/signup'}>
                 Cadastrar-se
             </NavItem>
         </NavMenu>

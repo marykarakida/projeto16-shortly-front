@@ -60,7 +60,7 @@ export default function SigninPage() {
                     placeholder="Senha"
                     required
                 />
-                <Button type="submit" disabled={loading}>
+                <Button type="submit" disabled={loading} margin="60px 0 0">
                     Entrar
                 </Button>
             </Form>

@@ -30,7 +30,7 @@ export default function SignupPage() {
         e.preventDefault();
         const body = { name, email, password, confirmPassword };
 
-        await executePost(body);
+        await executePost(body, null, () => navigate('/signin', { replace: true }));
     };
 
     return (
@@ -61,7 +61,7 @@ export default function SignupPage() {
                     placeholder="Confirmar senha"
                     required
                 />
-                <Button type="submit" disabled={loading}>
+                <Button type="submit" disabled={loading} margin="60px 0 0">
                     Criar conta
                 </Button>
             </Form>

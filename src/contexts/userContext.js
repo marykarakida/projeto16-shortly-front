@@ -3,13 +3,19 @@ import React, { createContext, useState, useEffect, useMemo } from 'react';
 const UserContext = createContext();
 
 export function UserContextProvider({ children }) {
-    const [authenticated, setAuthenticated] = useState(false);
+    const [authenticated, setAuthenticated] = useState(null);
 
     const getSession = () => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : null;
         const user = JSON.parse(localStorage.getItem('user'));
 
         return { token, user };
+    };
+
+    const finishSession = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setAuthenticated(false);
     };
 
     const checkSession = () => {
@@ -17,13 +23,9 @@ export function UserContextProvider({ children }) {
 
         if (token && user) {
             setAuthenticated(true);
+        } else {
+            finishSession();
         }
-    };
-
-    const finishSession = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setAuthenticated(false);
     };
 
     useEffect(() => {

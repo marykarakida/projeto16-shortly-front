@@ -10,7 +10,9 @@ export default styled.form`
         margin-top: 16px;
     }
 
-    button {
-        margin-top: 60px;
+    div {
+        display: flex;
+        gap: 70px;
+        width: 100%;
     }
 `;

@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import UserContext from '../contexts/userContext';
 import useAxios from '../hooks/useAxios';
@@ -10,8 +11,13 @@ import Title from '../components/Ranking/Title';
 import trophyIcon from '../assets/images/trophy.png';
 
 export default function RankingPage() {
-    const { authenticated } = useContext(UserContext);
+    const { key } = useLocation();
+    const { authenticated, checkSession } = useContext(UserContext);
     const [{ data: ranking, loading }] = useAxios({ method: 'GET', route: '/ranking' });
+
+    useEffect(() => {
+        checkSession();
+    }, [key]);
 
     return (
         <PageContainer>
@@ -27,7 +33,7 @@ export default function RankingPage() {
                         </RankingItem>
                     ))}
             </RankingList>
-            {!authenticated && (
+            {authenticated === false && (
                 <Title>
                     <h2>Crie sua conta para usar nosso serviço!</h2>
                 </Title>
