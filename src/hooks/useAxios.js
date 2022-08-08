@@ -21,7 +21,7 @@ const useAxios = ({ method, route, headers: defaultHeaders, body: defaultBody, q
         url: `${route}${queryStringBuilder(query)}`,
     };
 
-    const executeRequest = async (body = defaultBody, headers = null) => {
+    const executeRequest = async (body = defaultBody, headers = null, callback = null) => {
         try {
             setLoading(true);
 
@@ -39,6 +39,9 @@ const useAxios = ({ method, route, headers: defaultHeaders, body: defaultBody, q
         } catch (err) {
             setError(err);
         } finally {
+            if (callback) {
+                callback();
+            }
             setLoading(false);
         }
     };
