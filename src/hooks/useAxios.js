@@ -8,7 +8,7 @@ const queryStringBuilder = (query = {}) =>
               .join('&')}`
         : '';
 
-const useAxios = ({ method, route, headers, body: defaultBody, query }, manual = false) => {
+const useAxios = ({ method, route, headers: defaultHeaders, body: defaultBody, query }, manual = false) => {
     const [response, setResponse] = useState(null);
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(!manual);
@@ -18,16 +18,19 @@ const useAxios = ({ method, route, headers, body: defaultBody, query }, manual =
 
     const config = {
         method,
-        headers,
         url: `${route}${queryStringBuilder(query)}`,
     };
 
-    const executeRequest = async (body = defaultBody) => {
+    const executeRequest = async (body = defaultBody, headers = null) => {
         try {
             setLoading(true);
 
             const result = await axios({
                 ...config,
+                headers: {
+                    ...defaultHeaders,
+                    ...headers,
+                },
                 data: body,
             });
 

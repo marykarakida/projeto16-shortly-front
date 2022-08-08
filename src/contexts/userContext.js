@@ -6,7 +6,7 @@ export function UserContextProvider({ children }) {
     const [authenticated, setAuthenticated] = useState(null);
 
     const getSession = () => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : null;
         const user = JSON.parse(localStorage.getItem('user'));
 
         return { token, user };
