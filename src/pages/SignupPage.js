@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import UserContext from '../contexts/userContext';
 import useAxios from '../hooks/useAxios';
 
 import PageContainer from '../layout/PageContainer';
@@ -8,12 +10,21 @@ import Input from '../components/Form/Input';
 import Button from '../components/Form/Button';
 
 export default function SignupPage() {
+    const navigate = useNavigate();
+
+    const { authenticated } = useContext(UserContext);
+    const [{ loading }, executePost] = useAxios({ method: 'POST', route: '/signup' }, true);
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const [{ loading }, executePost] = useAxios({ method: 'POST', route: '/signup' }, true);
+    useEffect(() => {
+        if (authenticated) {
+            navigate('/home', { replace: true });
+        }
+    }, [authenticated]);
 
     const signUp = async (e) => {
         e.preventDefault();
