@@ -11,7 +11,7 @@ const queryStringBuilder = (query = {}) =>
 const useAxios = ({ method, route, headers, body: defaultBody, query }, manual = false) => {
     const [response, setResponse] = useState(null);
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(!manual);
     const [error, setError] = useState(null);
 
     axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
